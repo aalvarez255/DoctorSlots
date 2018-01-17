@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace DoctorSlots.Api.Services
 {
-    interface IAuthHttpClient
+    public interface IAuthHttpClient
     {
-        /* Performs a GET request to the provided URL using Basic Authorization header */
-        Task<T> Get<T>(string url); 
+        /* Performs a GET request to the provided URL using Authorization header */
+        Task<T> GetAsync<T>(string url); 
     }
 }

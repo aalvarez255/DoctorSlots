@@ -17,9 +17,15 @@ namespace DoctorSlots.Api
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.AddJsonFile("private-settings.json", optional: false, reloadOnChange: true);
+                })
+               .UseStartup<Startup>()
+               .Build();
+        }
     }
 }

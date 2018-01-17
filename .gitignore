@@ -287,8 +287,8 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
-credentials.json
-credentials.*.json
+private-settings.json
+private-settings.*.json
 
 ## Angular project ignores
 
