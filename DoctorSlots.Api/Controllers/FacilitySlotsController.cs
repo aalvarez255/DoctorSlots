@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DoctorSlots.Api.DTOs;
 using DoctorSlots.Api.Services;
-using DoctorSlots.Api.SlotService.Models;
+using DoctorSlots.Api.SlotServiceClient.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoctorSlots.Api.Controllers
@@ -17,13 +18,12 @@ namespace DoctorSlots.Api.Controllers
         {
             _httpClient = httpClient;
         }
-
-        // GET api/values
+        
         [HttpGet]
-        public async Task<IEnumerable<string>> Get()
+        public async Task<FacilitySlots> Get()
         {
-            var result = await _httpClient.GetAsync<WeeklyAvailability>("/availability/GetWeeklyAvailability/20180115");
-            return new string[] { "value1", "value2" };
+            var result = await _httpClient.GetAsync<WeeklyAvailability>("availability/GetWeeklyAvailability/20180115");
+            return null;
         }        
     }
 }

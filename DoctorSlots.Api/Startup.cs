@@ -1,7 +1,7 @@
 ﻿using DoctorSlots.Api.Services;
-using DoctorSlots.Api.Services.SlotService;
-using DoctorSlots.Api.Services.SlotService.Models;
-using DoctorSlots.Api.Services.SlotService.Utils;
+using DoctorSlots.Api.Services.SlotServiceClient;
+using DoctorSlots.Api.Services.SlotServiceClient.Models;
+using DoctorSlots.Api.Services.SlotServiceClient.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

@@ -24,21 +24,12 @@ namespace DoctorSlots.Api.Services
                     client.DefaultRequestHeaders.Authorization = GetAuthorizationHeader();
                     T result = default(T);
 
-                    try
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    if (response.IsSuccessStatusCode)
                     {
-                        HttpResponseMessage response = await client.GetAsync(url);
-                        if (response.IsSuccessStatusCode)
-                        {
-                            string responseText = await response.Content.ReadAsStringAsync();
-                            result = JsonConvert.DeserializeObject<T>(responseText);
-                        }
-
+                        string responseText = await response.Content.ReadAsStringAsync();
+                        result = JsonConvert.DeserializeObject<T>(responseText);
                     }
-                    catch (Exception e)
-                    {
-
-                    }
-
 
                     return result;
                 }

@@ -1,6 +1,6 @@
-﻿using DoctorSlots.Api.Services.SlotService.Extensions;
-using DoctorSlots.Api.Services.SlotService.Models;
-using DoctorSlots.Api.Services.SlotService.Utils;
+﻿using DoctorSlots.Api.Services.SlotServiceClient.Extensions;
+using DoctorSlots.Api.Services.SlotServiceClient.Models;
+using DoctorSlots.Api.Services.SlotServiceClient.Utils;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace DoctorSlots.Api.Services.SlotService
+namespace DoctorSlots.Api.Services.SlotServiceClient
 {
     public class SlotHttpClient : AuthHttpClient
     {
@@ -21,6 +21,7 @@ namespace DoctorSlots.Api.Services.SlotService
 
         public SlotHttpClient(IOptions<SlotServiceConfiguration> serviceConfiguration, IEncoder encoder)
         {
+
             _baseAddress = serviceConfiguration.Value.BaseAddress;
             _username = serviceConfiguration.Value.Username;
             _password = serviceConfiguration.Value.Password;

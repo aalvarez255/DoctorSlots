@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DoctorSlots.Api.Services.SlotService.Utils
+namespace DoctorSlots.Api.Services.SlotServiceClient.Utils
 {
     public class Encoder : IEncoder
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DoctorSlots.Api.SlotService.Models
+namespace DoctorSlots.Api.SlotServiceClient.Models
 {
     public class Slot
     {
