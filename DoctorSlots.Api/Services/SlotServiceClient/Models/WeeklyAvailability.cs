@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DoctorSlots.Api.SlotServiceClient.Models
 {
-    [JsonConverter(typeof(SlotJsonConverter))]
+    [JsonConverter(typeof(SlotServiceSerializer))]
     public class WeeklyAvailability
     {
         public WeeklyAvailability()

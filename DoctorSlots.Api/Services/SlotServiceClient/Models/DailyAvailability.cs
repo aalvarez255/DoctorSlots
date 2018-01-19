@@ -12,7 +12,7 @@ namespace DoctorSlots.Api.SlotServiceClient.Models
             BusySlots = new List<Slot>();
         }
 
-        public int DayOfWeek { get; set; }  //Sunday is 0, Monday is 1, and so on.
+        public int DayOfWeek { get; set; }  //Monday is 0, Tuesday is 1, and so on.
 
         public WorkPeriod WorkPeriod { get; set; }
         public List<Slot> BusySlots { get; set; }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DoctorSlots.Api.Services.SlotServiceClient.Extensions
 {
-    public class SlotJsonConverter : JsonConverter
+    public class SlotServiceSerializer : JsonConverter
     {
         private readonly string[] _days = new string[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
         
@@ -37,7 +37,7 @@ namespace DoctorSlots.Api.Services.SlotServiceClient.Extensions
 
                 availability.DaysAvailability.Add(new DailyAvailability()
                 {
-                    DayOfWeek = i % 6,
+                    DayOfWeek = i,
                     WorkPeriod = jsonDay["WorkPeriod"]?.ToObject<WorkPeriod>(),
                     BusySlots = jsonDay["BusySlots"]?.ToObject<List<Slot>>()
                 });

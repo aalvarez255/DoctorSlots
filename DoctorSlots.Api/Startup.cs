@@ -1,4 +1,5 @@
 ﻿using DoctorSlots.Api.Services;
+using DoctorSlots.Api.Services.SlotParser;
 using DoctorSlots.Api.Services.SlotServiceClient;
 using DoctorSlots.Api.Services.SlotServiceClient.Models;
 using DoctorSlots.Api.Services.SlotServiceClient.Utils;
@@ -23,8 +24,9 @@ namespace DoctorSlots.Api
         {
             services.Configure<SlotServiceConfiguration>(Configuration.GetSection("SlotService"));
 
-            services.AddSingleton<IEncoder, Encoder>();
+            services.AddScoped<IEncoder, Encoder>();
             services.AddScoped<IAuthHttpClient, SlotHttpClient>();
+            services.AddScoped<ISlotConverter, SlotConverter>();
 
             services.AddMvc();
         }
