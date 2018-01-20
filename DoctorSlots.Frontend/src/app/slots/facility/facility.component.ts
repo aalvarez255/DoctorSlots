@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core/src/metadata/directives';
-import { Facility } from '../../shared/models/Facility';
+import { Component, OnInit } from '@angular/core'
+import { Input } from '@angular/core'
+import { Facility } from '../../shared/models/Facility'
 
 @Component({
   selector: 'app-facility',
