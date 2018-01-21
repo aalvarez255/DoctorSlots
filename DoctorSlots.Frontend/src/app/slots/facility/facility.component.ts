@@ -3,7 +3,7 @@ import { Input } from '@angular/core'
 import { Facility } from '../../shared/models/Facility'
 
 @Component({
-  selector: 'app-facility',
+  selector: 'facility',
   templateUrl: './facility.component.html',
   styleUrls: ['./facility.component.less']
 })

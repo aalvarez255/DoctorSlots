@@ -1,5 +1,5 @@
-﻿using DoctorSlots.Api.DTOs;
-using DoctorSlots.Api.SlotServiceClient.Models;
+﻿using DoctorSlots.Api.Extensions;
+using DoctorSlots.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +7,42 @@ using System.Threading.Tasks;
 
 namespace DoctorSlots.Api.Services.SlotParser
 {
-    public class SlotConverter : ISlotConverter
+    public class SlotService : ISlotService
     {
-        public List<Slot> ParseWorkPeriods(WeeklyAvailability weeklyAvailability, DateTime firstDayOfWeek)
+        private const string GetWeeklyAvailabilityUrl = "availability/GetWeeklyAvailability/{0}";
+
+        private readonly IAuthHttpClient _httpClient;
+
+        public SlotService(IAuthHttpClient httpClient)
         {
+            _httpClient = httpClient;
+        }
+
+        public async Task<WeeklyAvailability> GetWeeklyAvailability(DateTime date)
+        {
+            DateTime mondayOfWeek = GetMondayOfWeek(date);
+
+            string requestUrl = string.Format(GetWeeklyAvailabilityUrl, 
+                                    mondayOfWeek.ToString("yyyyMMdd"));
+
+            var result = await _httpClient.GetAsync<WeeklyAvailability>(requestUrl);
+
+            if (result == null)
+                throw new Exception("Error downloading weekly availability from slots service");
+
+            return result;
+        }
+
+        public List<Slot> ParseWorkPeriods(WeeklyAvailability weeklyAvailability, DateTime date)
+        {
+            DateTime mondayOfWeek = GetMondayOfWeek(date);
+
             int slotDuration = weeklyAvailability.SlotDurationMinutes;
             List<Slot> slots = new List<Slot>();
 
             foreach (var dailyAvailability in weeklyAvailability.DaysAvailability)
             {
-                DateTime dayDate = firstDayOfWeek.AddDays(dailyAvailability.DayOfWeek);
+                DateTime dayDate = mondayOfWeek.AddDays(dailyAvailability.DayOfWeek);
 
                 TimeSpan startMorningTime = new TimeSpan(dailyAvailability.WorkPeriod.StartHour, 0, 0);
                 TimeSpan endMorningTime = new TimeSpan(dailyAvailability.WorkPeriod.LunchStartHour, 0, 0);
@@ -37,6 +63,10 @@ namespace DoctorSlots.Api.Services.SlotParser
             return slots;
         }
 
+        private DateTime GetMondayOfWeek(DateTime date)
+        {
+            return date.GetMondayOfWeek();
+        }
         private List<Slot> GetSlotsBetweenDates(DateTime start, DateTime end, int duration)
         {
             int hours = end.Hour - start.Hour;

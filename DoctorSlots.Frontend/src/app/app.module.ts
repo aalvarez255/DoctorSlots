@@ -6,10 +6,9 @@ import { RouterModule } from '@angular/router'
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 
+import { SharedModule } from './shared/shared.module'
+
 import { AppComponent } from './app.component'
-import { SlotsCalendarComponent } from './slots/slots-calendar/slots-calendar.component'
-import { FacilityComponent } from './slots/facility/facility.component';
-import { AppNavbarComponent } from './shared/components/app-navbar/app-navbar.component'
 
 import { appRoutes } from './routes'
 
@@ -19,10 +18,7 @@ export const createTranslateLoader = (http: HttpClient) => {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SlotsCalendarComponent,
-    FacilityComponent,
-    AppNavbarComponent
+    AppComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -33,7 +29,8 @@ export const createTranslateLoader = (http: HttpClient) => {
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

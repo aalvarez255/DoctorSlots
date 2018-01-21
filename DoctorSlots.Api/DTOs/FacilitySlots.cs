@@ -1,4 +1,4 @@
-﻿using DoctorSlots.Api.SlotServiceClient.Models;
+﻿using DoctorSlots.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

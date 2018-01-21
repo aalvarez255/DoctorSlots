@@ -1,4 +1,4 @@
-﻿using DoctorSlots.Api.SlotServiceClient.Models;
+﻿using DoctorSlots.Api.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace DoctorSlots.Api.Services.SlotServiceClient.Extensions
+namespace DoctorSlots.Api.Services.Extensions
 {
     public class SlotServiceSerializer : JsonConverter
     {

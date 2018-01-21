@@ -5,39 +5,35 @@ using System.Threading.Tasks;
 using DoctorSlots.Api.DTOs;
 using DoctorSlots.Api.Services;
 using DoctorSlots.Api.Services.SlotParser;
-using DoctorSlots.Api.SlotServiceClient.Models;
+using DoctorSlots.Api.Models;
 using Microsoft.AspNetCore.Mvc;
+using DoctorSlots.Api.Extensions;
 
 namespace DoctorSlots.Api.Controllers
 {
     [Route("api/[controller]")]
     public class FacilitySlotsController : Controller
     {
-        private readonly IAuthHttpClient _httpClient;
-        private readonly ISlotConverter _slotConverter;
+        private readonly ISlotService _slotService;
 
-        public FacilitySlotsController(
-            IAuthHttpClient httpClient, 
-            ISlotConverter slotConverter)
+        public FacilitySlotsController(ISlotService slotService)
         {
-            _httpClient = httpClient;
-            _slotConverter = slotConverter;
+            _slotService = slotService;
         }
-        
-        [HttpGet]
-        public async Task<FacilitySlots> Get()
+
+        [HttpGet("{date}")]
+        public async Task<IActionResult> Get(DateTime date)
         {
-            var availability = await _httpClient.GetAsync<WeeklyAvailability>(
-                            "availability/GetWeeklyAvailability/20180115");
+            if (date == null || date == DateTime.MinValue)
+                return BadRequest(new ApiError(400, "Incorrect or missing parameter 'date'"));
 
-            var slots = _slotConverter.ParseWorkPeriods(
-                            availability, 
-                            DateTime.ParseExact("20180115", "yyyyMMdd", null));
+            var availability = await _slotService.GetWeeklyAvailability(date);
+            var slots = _slotService.ParseWorkPeriods(availability, date);
 
-            return new FacilitySlots() {
+            return new OkObjectResult(new FacilitySlots() {
                 Facility = availability.Facility,
                 Slots = slots
-            };
+            });
         }        
     }
 }

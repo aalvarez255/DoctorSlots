@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DoctorSlots.Api.Services.SlotServiceClient.Utils
+namespace DoctorSlots.Api.Utils
 {
     public interface IEncoder
     {

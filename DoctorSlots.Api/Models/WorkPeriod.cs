@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DoctorSlots.Api.SlotServiceClient.Models
+namespace DoctorSlots.Api.Models
 {
     public class WorkPeriod
     {

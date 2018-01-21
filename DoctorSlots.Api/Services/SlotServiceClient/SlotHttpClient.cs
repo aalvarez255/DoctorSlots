@@ -1,13 +1,7 @@
-﻿using DoctorSlots.Api.Services.SlotServiceClient.Extensions;
-using DoctorSlots.Api.Services.SlotServiceClient.Models;
-using DoctorSlots.Api.Services.SlotServiceClient.Utils;
+﻿using DoctorSlots.Api.Models;
+using DoctorSlots.Api.Utils;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 
 namespace DoctorSlots.Api.Services.SlotServiceClient
 {

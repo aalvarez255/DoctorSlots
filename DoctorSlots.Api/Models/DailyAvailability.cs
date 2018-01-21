@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DoctorSlots.Api.SlotServiceClient.Models
+namespace DoctorSlots.Api.Models
 {
     public class DailyAvailability
     {
