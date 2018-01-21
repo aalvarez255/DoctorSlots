@@ -34,7 +34,6 @@ export class AppHttpService {
 	}
 
 	get(route) {
-        console.log(route)
 		return this._http.get(route, this._options)
 			.toPromise()
 			.then(this._extractData)
