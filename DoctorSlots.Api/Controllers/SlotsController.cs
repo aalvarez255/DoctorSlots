@@ -12,11 +12,11 @@ using DoctorSlots.Api.Extensions;
 namespace DoctorSlots.Api.Controllers
 {
     [Route("api/[controller]")]
-    public class FacilitySlotsController : Controller
+    public class SlotsController : Controller
     {
         private readonly ISlotService _slotService;
 
-        public FacilitySlotsController(ISlotService slotService)
+        public SlotsController(ISlotService slotService)
         {
             _slotService = slotService;
         }
@@ -30,10 +30,7 @@ namespace DoctorSlots.Api.Controllers
             var availability = await _slotService.GetWeeklyAvailability(date);
             var slots = _slotService.ParseWorkPeriods(availability, date);
 
-            return new OkObjectResult(new FacilitySlots() {
-                Facility = availability.Facility,
-                Slots = slots
-            });
+            return new OkObjectResult(slots);
         }        
     }
 }

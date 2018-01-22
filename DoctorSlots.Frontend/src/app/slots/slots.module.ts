@@ -2,10 +2,11 @@ import { RouterModule, Routes } from '@angular/router'
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
+import { BlockUIModule } from 'ng-block-ui'
 import { TranslateModule } from '@ngx-translate/core'
+
 import { SlotsComponent } from './slots.component'
 import { SlotsCalendarComponent } from './slots-calendar/slots-calendar.component'
-import { FacilityComponent } from './facility/facility.component'
 
 export const moduleRoutes: Routes = [
     { path: '', component: SlotsComponent }
@@ -13,14 +14,14 @@ export const moduleRoutes: Routes = [
 
 @NgModule({
     imports: [
-         CommonModule,
+        CommonModule,
         TranslateModule,
-        RouterModule.forChild(moduleRoutes)
+        RouterModule.forChild(moduleRoutes),
+        BlockUIModule
     ],
     declarations:
     [
         SlotsComponent,
-        FacilityComponent,
         SlotsCalendarComponent
     ]
 })

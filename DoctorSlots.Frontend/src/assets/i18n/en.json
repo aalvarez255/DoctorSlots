@@ -1,0 +1,5 @@
+{ 
+    "slotsCalendarTitle": "Slot reservation",
+    "slotsCalendarText": "Select a date range to reserve a doctor's slot. <br/>Available slots are shown as green blocks in the calendar. Past dates are not available to select.",
+    "loading": "Loading..."
+}

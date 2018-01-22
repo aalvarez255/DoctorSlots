@@ -14,8 +14,6 @@ namespace DoctorSlots.Api.Models
         {
             DaysAvailability = new List<DailyAvailability>();
         }
-
-        public Facility Facility { get; set; }
         public int SlotDurationMinutes { get; set; }      
         public List<DailyAvailability> DaysAvailability { get; set; }
     }

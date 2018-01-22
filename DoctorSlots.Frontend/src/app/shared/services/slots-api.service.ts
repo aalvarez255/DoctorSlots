@@ -17,7 +17,7 @@ export class SlotsApiService {
         this._rootUrl = "/api"
 	}
 
-	getFacilitySlots(date: Date) {
-		return this._send("get", "/facilitySlots/" + date.toJSON())
+	getSlots(date: Date) {
+		return this._send("get", "/slots/" + date.toJSON())
 	}
 }

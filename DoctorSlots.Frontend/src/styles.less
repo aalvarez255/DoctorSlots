@@ -1,0 +1,40 @@
+/* global variables */
+
+@background-color: #F7F6F6;
+@main-color: #FFF;
+@text-color: #333;
+@text-size: 16px;
+body {
+    margin: 0;
+    color: @text-color;
+    font-family: 'Open Sans', sans-serif;
+    background-color: @background-color;
+}
+
+main {
+    padding-top: 50px;
+}
+
+.block {
+    margin-top: 50px;
+    padding: 35px;
+    background-color: @main-color;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.dropdown {
+    border: 1px solid #ddd;
+    background-color: white;
+    text-align: center;
+    border-radius: 4px;
+    z-index: 9;
+}
+
+/* fullcalendar overrides */
+.fc-agendaWeek-view tr, .fc-agendaDay-view tr {
+    height: 100px;
+}
+.fc-header-toolbar h2 {
+    font-size: 21px;
+}

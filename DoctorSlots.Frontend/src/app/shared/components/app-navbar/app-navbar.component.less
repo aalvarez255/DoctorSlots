@@ -1,0 +1,41 @@
+.navbar {
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+    padding: 5px 0;
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 8;
+    .brand {
+        img {
+            width: 35px;
+        }
+    }
+    .language-selector {
+        text-align: right;
+        padding-top: 6px;
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+        .dropdown {
+            position: absolute;
+            display: none;
+            right: 0;
+            &.active {
+                display: block;
+            }
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                li {
+                    cursor: pointer;
+                    padding: 5px 20px;
+                    &:hover {
+                        background-color: #ddd;
+                    }
+                }
+            }
+        }
+    }
+}

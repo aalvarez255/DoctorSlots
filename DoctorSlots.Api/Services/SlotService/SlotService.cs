@@ -57,6 +57,9 @@ namespace DoctorSlots.Api.Services.SlotParser
                 if (dailyAvailability.BusySlots != null && dailyAvailability.BusySlots.Any())
                     daySlots.RemoveAll(s => dailyAvailability.BusySlots.Contains(s));
 
+                //remove past dates
+                daySlots.RemoveAll(s => s.Start < DateTime.Now);
+
                 slots.AddRange(daySlots);
             }
 

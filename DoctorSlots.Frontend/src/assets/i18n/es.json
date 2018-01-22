@@ -1,0 +1,5 @@
+{ 
+    "slotsCalendarTitle": "Reserva de visitas",
+    "slotsCalendarText": "Seleccione un rango horario para reservar una visita con el doctor/a. <br/>Las visitas disponibles se muestran de color verde en el calendario. Las fechas anteriores a la hora actual no están disponibles.",
+    "loading": "Cargando..."
+}

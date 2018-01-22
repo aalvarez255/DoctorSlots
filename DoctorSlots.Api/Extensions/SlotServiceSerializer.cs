@@ -25,7 +25,6 @@ namespace DoctorSlots.Api.Services.Extensions
             WeeklyAvailability availability = new WeeklyAvailability
             {
                 // Deserialize fields with same name
-                Facility = jsonObject["Facility"].ToObject<Facility>(),
                 SlotDurationMinutes = jsonObject["SlotDurationMinutes"].ToObject<int>()
             };
 
