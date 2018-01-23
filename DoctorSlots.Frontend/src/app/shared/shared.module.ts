@@ -18,10 +18,6 @@ import { AppHttpService } from './services/app-http.service'
         TranslateModule,
         HttpClientModule
     ],
-    providers: [
-        AppHttpService,
-        SlotsApiService
-    ],
     declarations: [
         AppNavbarComponent
     ],

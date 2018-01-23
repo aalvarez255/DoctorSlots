@@ -1,0 +1,61 @@
+<div class="slot-reservation block">
+	<div class="row">
+		<div class="col">
+			<h1 class="title">
+				{{ 'slotReservation' | translate }}
+			</h1>
+		</div>
+	</div>
+	<div class="row" *ngIf="apiError">
+		<div class="col">
+			<div class="alert alert-error">
+				{{ apiError }}
+			</div>
+		</div>
+	</div>
+	<div class="row" *ngIf="success">
+		<div class="col">
+			<div class="alert alert-success">
+				{{ 'reservationSuccessMessage' | translate }}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<form (ngSubmit)="onSubmit()" #form="ngForm" [class.submitted]="submitted">
+				<div class="form-group">
+					<label for="start">{{ 'startTime' | translate }}</label>
+					<input type="text" class="form-control" id="start" required [(ngModel)]="displayStartDate" name="start" disabled>
+				</div>
+				<div class="form-group">
+					<label for="end">{{ 'endTime' | translate }}</label>
+					<input type="text" class="form-control" id="end" required [(ngModel)]="displayEndDate" name="end" disabled>
+				</div>
+				<div class="form-group">
+					<label for="name">{{ 'name' | translate }}</label>
+					<input type="text" class="form-control" id="name" required [(ngModel)]="slotReservation.patient.name" name="name">
+				</div>
+				<div class="form-group">
+					<label for="second-name">{{ 'secondName' | translate }}</label>
+					<input type="text" class="form-control" id="second-name" required [(ngModel)]="slotReservation.patient.secondName" name="secondName">
+				</div>
+				<div class="form-group">
+					<label for="email">{{ 'email' | translate }}</label>
+					<input type="text" class="form-control" id="email" required [(ngModel)]="slotReservation.patient.email" name="email">
+				</div>
+				<div class="form-group">
+					<label for="phone">{{ 'phone' | translate }}</label>
+					<input type="text" class="form-control" id="phone" required [(ngModel)]="slotReservation.patient.phone" name="phone">
+				</div>
+				<div class="form-group">
+					<label for="comments">{{ 'comments' | translate }}</label>
+					<textarea rows="10" class="form-control" id="comments" [(ngModel)]="slotReservation.comments" name="comments"></textarea>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-success" [attr.disabled]="success">{{ 'submit' | translate }}</button>
+					<button class="btn" routerLink="/">{{ 'back' | translate}}</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,5 +1,16 @@
 {
     "slotsCalendarTitle": "Reserva de visites",
     "slotsCalendarText": "Seleccioni un rang horari per reservar una visita amb el doctor/a. <br/>Les visites disponibles es mostren al calendari de color verd. No es poden seleccionar dates passades.",
-    "loading": "Carregant..."
+    "loading": "Carregant...",
+    "slotReservation": "Reservar visita",
+    "startTime": "Hora d'inici",
+    "endTime": "Hora fi",
+    "comments": "Comentaris",
+    "name": "Nom",
+    "secondName": "Cognom",
+    "email": "Email",
+    "phone": "Telèfon",
+    "submit": "Acceptar",
+    "back": "Enrere",
+    "reservationSuccessMessage": "Reserva realitzada correctament"
 }

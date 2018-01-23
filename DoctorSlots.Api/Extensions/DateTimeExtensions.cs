@@ -12,5 +12,10 @@ namespace DoctorSlots.Api.Extensions
             int diff = (7 + (date.DayOfWeek - DayOfWeek.Monday)) % 7;
             return date.AddDays(-1 * diff).Date;
         }
+
+        public static bool IsNullOrMin(this DateTime date)
+        {
+            return date == null || date == DateTime.MinValue;
+        }
     }
 }

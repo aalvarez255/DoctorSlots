@@ -1,5 +1,16 @@
 { 
     "slotsCalendarTitle": "Slot reservation",
     "slotsCalendarText": "Select a date range to reserve a doctor's slot. <br/>Available slots are shown as green blocks in the calendar. Past dates are not available to select.",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "slotReservation": "Slot reservation",
+    "startTime": "Start time",
+    "endTime": "End time",
+    "comments": "Comments",
+    "name": "Name",
+    "secondName": "Second name",
+    "email": "Email",
+    "phone": "Phone",
+    "submit": "Submit",
+    "back": "Back",
+    "reservationSuccessMessage": "Slot reservation completed successfully"
 }

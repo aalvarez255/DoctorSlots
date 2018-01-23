@@ -4,6 +4,7 @@ import { SlotsApiService } from '../../shared/services/slots-api.service'
 import { Slot } from '../../shared/models/Slot'
 
 import { BlockUI, NgBlockUI } from 'ng-block-ui'
+import { Router } from '@angular/router'
 
 declare var $: any
 
@@ -16,12 +17,15 @@ declare var $: any
 export class SlotsCalendarComponent implements OnInit {
 
 	@BlockUI() blockUI: NgBlockUI
+	errorApi: string
 
+	private _facilityId: string
 	private _loadingText: string
 
 	constructor(
 		private _translateService: TranslateService,
-		private _api: SlotsApiService
+		private _api: SlotsApiService,
+		private _router: Router
 	) {
 		_translateService.get('loading').subscribe((res: string) => {
 			this._loadingText = res
@@ -46,14 +50,26 @@ export class SlotsCalendarComponent implements OnInit {
 			firstDay: 1,
 			height: "auto",
 			contentHeight: "auto",
+			timezone: "auto",
 			events: (start, end, timezone, callback) => {
-				this._api.getSlots(start).then(slots => {
+				this._api.getSlots(start).then(response => {
 					//limit min and max hours in calendar
+					this._facilityId = response["facilityId"]
+
+					let slots = response["slots"]
 					$('#calendar').fullCalendar('option', 'minTime', this.getMinMaxHourAsString(slots, true))
 					$('#calendar').fullCalendar('option', 'maxTime', this.getMinMaxHourAsString(slots, false))
 
 					callback(slots)
+				}).catch(error => {
+					this.blockUI.stop()
+					this.errorApi = error
 				})
+			},
+			eventClick: (calEvent, jsEvent, view) => {
+				let startDate = calEvent.start.toDate()
+				let endDate = calEvent.end.toDate()
+				this._router.navigate(['/reservation'], { queryParams: { start: startDate.toJSON(), end: endDate.toJSON(), facilityId: this._facilityId } })
 			},
 			eventColor: '#378006',
 			loading: (isLoading, view) => {
@@ -77,7 +93,7 @@ export class SlotsCalendarComponent implements OnInit {
 	}
 
 	private getMinMaxHourAsString(slots: Slot[], isMin: boolean): string {
-		let hours = slots.map(slot => new Date(isMin ? slot.start : slot.end).getHours())
+		let hours = slots.map(s => new Date(isMin ? s.start : s.end).getHours())
 
 		let minMaxHour = isMin ?
 			hours.reduce((a, b) => a < b ? a : b) :

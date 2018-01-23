@@ -1,5 +1,16 @@
 { 
     "slotsCalendarTitle": "Reserva de visitas",
     "slotsCalendarText": "Seleccione un rango horario para reservar una visita con el doctor/a. <br/>Las visitas disponibles se muestran de color verde en el calendario. Las fechas anteriores a la hora actual no están disponibles.",
-    "loading": "Cargando..."
+    "loading": "Cargando...",
+    "slotReservation": "Reservar visita",
+    "startTime": "Hora inicio",
+    "endTime": "Hora fin",
+    "comments": "Comentarios",
+    "name": "Nombre",
+    "secondName": "Apellido",
+    "email": "Email",
+    "phone": "Teléfono",
+    "submit": "Aceptar",
+    "back": "Atrás",
+    "reservationSuccessMessage": "Reserva completada correctamente"
 }

@@ -17,13 +17,11 @@ export class AppHttpService {
 		if (response.status < 200 || response.status >= 300) {
 			throw new Error('Bad response status: ' + response.status)
 		}
-		return response.json() || {}
+		return response["_body"] && response.json() || {}
 	}
 
 	private _handleError(error) {
-		let errMsg = "API error -> " + error
-		console.error(errMsg)
-		return Promise.reject(errMsg)
+		return Promise.reject(error["_body"])
 	}
 
 	private _onInit() {

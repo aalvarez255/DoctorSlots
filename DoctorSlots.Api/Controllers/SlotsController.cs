@@ -30,7 +30,10 @@ namespace DoctorSlots.Api.Controllers
             var availability = await _slotService.GetWeeklyAvailability(date);
             var slots = _slotService.ParseWorkPeriods(availability, date);
 
-            return new OkObjectResult(slots);
+            return new OkObjectResult(new FacilitySlots() {
+                FacilityId = availability.FacilityId,
+                Slots = slots
+            });
         }        
     }
 }

@@ -8,6 +8,7 @@ namespace DoctorSlots.Api.Services
     public interface IAuthHttpClient
     {
         /* Performs a GET request to the provided URL using Authorization header */
-        Task<T> GetAsync<T>(string url); 
+        Task<T> GetAsync<T>(string url);
+        Task PostAsync<T>(string url, T data);
     }
 }

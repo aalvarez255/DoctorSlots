@@ -10,6 +10,7 @@ namespace DoctorSlots.Api.Services.SlotParser
     public class SlotService : ISlotService
     {
         private const string GetWeeklyAvailabilityUrl = "availability/GetWeeklyAvailability/{0}";
+        private const string TakeSlotUrl = "availability/TakeSlot";
 
         private readonly IAuthHttpClient _httpClient;
 
@@ -40,7 +41,10 @@ namespace DoctorSlots.Api.Services.SlotParser
             int slotDuration = weeklyAvailability.SlotDurationMinutes;
             List<Slot> slots = new List<Slot>();
 
-            foreach (var dailyAvailability in weeklyAvailability.DaysAvailability)
+            //discard past days
+            var todayWeekNumber = (int)(DateTime.Now.DayOfWeek + 6) % 7;
+            var validDays = weeklyAvailability.DaysAvailability.Where(d => d.DayOfWeek >= todayWeekNumber);
+            foreach (var dailyAvailability in validDays)
             {
                 DateTime dayDate = mondayOfWeek.AddDays(dailyAvailability.DayOfWeek);
 
@@ -55,15 +59,20 @@ namespace DoctorSlots.Api.Services.SlotParser
 
                 //remove busy slots from daily result set
                 if (dailyAvailability.BusySlots != null && dailyAvailability.BusySlots.Any())
-                    daySlots.RemoveAll(s => dailyAvailability.BusySlots.Contains(s));
+                    daySlots.RemoveAll(s => dailyAvailability.BusySlots.Any(b => b.Start == s.Start));
 
-                //remove past dates
+                //remove past hours
                 daySlots.RemoveAll(s => s.Start < DateTime.Now);
 
                 slots.AddRange(daySlots);
             }
 
             return slots;
+        }
+
+        public async Task PerformSlotReservation(TakeSlot takeSlot)
+        {
+            await _httpClient.PostAsync<TakeSlot>(TakeSlotUrl, takeSlot);
         }
 
         private DateTime GetMondayOfWeek(DateTime date)

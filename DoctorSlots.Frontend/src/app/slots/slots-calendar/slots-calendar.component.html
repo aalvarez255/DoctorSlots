@@ -8,6 +8,9 @@
             </p>
         </div>
         <hr />
+        <div *ngIf="errorApi" class="alert alert-error">
+            {{ errorApi }}
+        </div>
         <div id="calendar">
         </div>
     </block-ui>

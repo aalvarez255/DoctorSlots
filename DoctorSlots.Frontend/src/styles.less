@@ -4,6 +4,9 @@
 @main-color: #FFF;
 @text-color: #333;
 @text-size: 16px;
+@error-color: #d9534f;
+@success-color: #5cb85c;
+
 body {
     margin: 0;
     color: @text-color;
@@ -13,6 +16,10 @@ body {
 
 main {
     padding-top: 50px;
+}
+
+h1.title {
+    margin-top: 0;
 }
 
 .block {
@@ -31,10 +38,61 @@ main {
     z-index: 9;
 }
 
+.alert {
+    font-size: 12px;
+    border-radius: 2px;
+    padding: 15px;
+    margin-bottom: 15px;
+    color: white;
+    &.alert-error {
+        background-color: @error-color;
+    }
+    &.alert-success {
+        background-color: @success-color;
+    }
+}
+
+.btn {
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    &.btn-success {
+        color: #fff;
+        background-color: #5cb85c;
+        border-color: #5cb85c;
+    }
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+}
+
+
 /* fullcalendar overrides */
-.fc-agendaWeek-view tr, .fc-agendaDay-view tr {
+
+.fc-agendaWeek-view tr,
+.fc-agendaDay-view tr {
     height: 100px;
 }
+
 .fc-header-toolbar h2 {
     font-size: 21px;
+}
+
+.fc-time-grid .fc-bgevent,
+.fc-time-grid .fc-event {
+    cursor: pointer;
 }

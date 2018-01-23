@@ -13,5 +13,7 @@ namespace DoctorSlots.Api.Services.SlotParser
 
         /* Converts a WeeklyAvailability with work periods to a list of slots */
         List<Slot> ParseWorkPeriods(WeeklyAvailability weeklyAvailability, DateTime firstDayOfWeek);
+
+        Task PerformSlotReservation(TakeSlot takeSlot);
     }
 }
