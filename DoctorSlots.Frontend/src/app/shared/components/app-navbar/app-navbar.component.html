@@ -1,21 +1,22 @@
 <div class="navbar">
-	<div class="container">
-		<div class="row">
-			<div class="col-6 brand">
-				<a routerLink="/">
-					<img src="/assets/images/logo.png" alt="brand-icon" />
-				</a>
-			</div>
-			<div class="col-6 language-selector">
-				<a class="dropdown-toggle" (click)="dropdownActive = !dropdownActive"><i class="fa fa-globe" aria-hidden="true"></i> 	{{ currentLanguage | uppercase }}</a>			
-				<div class="dropdown" [class.active]="dropdownActive">
-					<ul>
-						<li *ngFor="let language of availableLanguages">
-							<a class="dropdown-link" (click)="selectLanguage(language)">{{ language | uppercase }}</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 brand">
+                <a routerLink="/">
+                    <img src="/assets/images/logo.png" alt="brand-icon" />
+                </a>
+            </div>
+            <div class="col-6 language-selector">
+                <a class="dropdown-toggle" (click)="dropdownActive = !dropdownActive">
+                    <i class="fa fa-globe" aria-hidden="true"></i> {{ currentLanguage | uppercase }}</a>
+                <div class="dropdown" [class.active]="dropdownActive">
+                    <ul>
+                        <li *ngFor="let language of availableLanguages">
+                            <a class="dropdown-link" (click)="selectLanguage(language)">{{ language | uppercase }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

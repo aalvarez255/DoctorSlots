@@ -5,6 +5,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DoctorSlots.Api.Tests.Services
 {
@@ -185,17 +186,57 @@ namespace DoctorSlots.Api.Tests.Services
         }
 
         [Test]
-        public void PerformSlotReservationSuccessTest()
+        public async Task PerformSlotReservationInvalidDatesTest()
         {
             //Arrange
             _authHttpClientMock.Setup(x => x.PostAsync(It.IsAny<string>(), It.IsAny<TakeSlot>()))
                  .Verifiable();
 
-            //Act
-            var result = _slotService.PerformSlotReservation(new TakeSlot());
+            TakeSlot takeSlot = new TakeSlot()
+            {
+                Start = DateTime.ParseExact("25/01/2018 00:10:00", "dd/MM/yyyy HH:mm:ss", null),
+                End = DateTime.ParseExact("25/01/2018 00:10:00", "dd/MM/yyyy HH:mm:ss", null)
+            };
 
-            //Assert
-            Assert.Pass();
+            try
+            {
+                //Act
+                await _slotService.PerformSlotReservation(takeSlot);
+
+                //Assert
+                Assert.Fail();
+            }
+            catch (Exception)
+            {
+                Assert.Pass();
+            }
+        }
+
+        [Test]
+        public async Task PerformSlotReservationNullDatesTest()
+        {
+            //Arrange
+            _authHttpClientMock.Setup(x => x.PostAsync(It.IsAny<string>(), It.IsAny<TakeSlot>()))
+                 .Verifiable();
+
+            TakeSlot takeSlot = new TakeSlot()
+            {
+                Start = DateTime.MinValue,
+                End = DateTime.ParseExact("25/01/2018 00:10:00", "dd/MM/yyyy HH:mm:ss", null)
+            };
+
+            try
+            {
+                //Act
+                await _slotService.PerformSlotReservation(takeSlot);
+
+                //Assert
+                Assert.Fail();
+            }
+            catch (Exception)
+            {
+                Assert.Pass();
+            }
         }
     }
 }

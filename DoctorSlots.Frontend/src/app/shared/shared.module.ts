@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
-import { HttpModule } from '@angular/http'
 import { NgModule } from '@angular/core'
 import { HttpClientModule, HttpClient } from '@angular/common/http'
 
@@ -11,10 +10,9 @@ import { SlotsApiService } from './services/slots-api.service'
 import { AppHttpService } from './services/app-http.service'
 
 @NgModule({
-    imports: [ 
+    imports: [
         RouterModule,
         CommonModule,
-        HttpModule,
         TranslateModule,
         HttpClientModule
     ],

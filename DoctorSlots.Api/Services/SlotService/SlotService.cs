@@ -72,6 +72,13 @@ namespace DoctorSlots.Api.Services
 
         public async Task PerformSlotReservation(TakeSlot takeSlot)
         {
+            if (takeSlot.Start.IsNullOrMin() ||
+                  takeSlot.End.IsNullOrMin())
+                throw new Exception("Start or End date missing");
+
+            if (takeSlot.Start >= takeSlot.End)
+                throw new Exception("Start date can't be greater than End date");
+
             await _httpClient.PostAsync(TakeSlotUrl, takeSlot);
         }
 

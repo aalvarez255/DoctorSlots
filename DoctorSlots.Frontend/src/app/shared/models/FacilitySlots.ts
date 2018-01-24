@@ -1,4 +1,4 @@
-import { Slot } from "./Slot"
+import { Slot } from './Slot'
 
 export class FacilitySlots {
     public facilityId: string

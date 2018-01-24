@@ -7,22 +7,21 @@ import { TakeSlot } from '../models/TakeSlot'
 
 @Injectable()
 export class SlotsApiService {
-	private _rootUrl: string = ""
-	private _apiUrl = path => this._rootUrl + path
-	private _send = (verb: string, path: string, data?: Object) =>
-		this._http[verb.toLowerCase()](this._apiUrl(path), data)
+    private _rootUrl = ''
+    private _apiUrl = path => this._rootUrl + path
+    private _send = (verb: string, path: string, data?: Object) =>
+        this._http[verb.toLowerCase()](this._apiUrl(path), data)
 
-	constructor(
-		private _http: AppHttpService)
-	{
-        this._rootUrl = "/api"
-	}
+    constructor(
+        private _http: AppHttpService) {
+        this._rootUrl = '/api'
+    }
 
-	getSlots(date: Date) {
-		return this._send("get", "/slots/" + date.toJSON())
-	}
+    getSlots(date: Date) {
+        return this._send('get', '/slots/' + date.toJSON())
+    }
 
-	postSlotReservation(slotReservation: TakeSlot) {
-		return this._send("post", "/slotReservation", slotReservation)
-	}
+    postSlotReservation(slotReservation: TakeSlot) {
+        return this._send('post', '/slotReservation', slotReservation)
+    }
 }

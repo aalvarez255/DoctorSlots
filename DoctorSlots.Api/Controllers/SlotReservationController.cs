@@ -21,18 +21,24 @@ namespace DoctorSlots.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]TakeSlot slotReservation)
+        public async Task<IActionResult> Post([FromBody]SlotReservation slotReservation)
         {
             try
             {
-                if (slotReservation.Start.IsNullOrMin() ||
-                    slotReservation.End.IsNullOrMin())
-                    throw new Exception("Start or End date missing");
+                if (slotReservation == null)
+                    throw new Exception("Invalid parameters");
 
-                if (slotReservation.Start >= slotReservation.End)
-                    throw new Exception("Start date can't be greater than End date");
+                //mapping
+                TakeSlot takeSlot = new TakeSlot()
+                {
+                    Comments = slotReservation.Comments,
+                    Patient = slotReservation.Patient,
+                    FacilityId = slotReservation.FacilityId,
+                    Start = DateTime.ParseExact(slotReservation.Start, "dd/MM/yyyy HH:mm:ss", null),
+                    End = DateTime.ParseExact(slotReservation.End, "dd/MM/yyyy HH:mm:ss", null)
+                };
 
-                await _slotService.PerformSlotReservation(slotReservation);
+                await _slotService.PerformSlotReservation(takeSlot);
                 return Ok();
             }
             catch (Exception e)
