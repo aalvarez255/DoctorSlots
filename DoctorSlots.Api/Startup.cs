@@ -1,5 +1,4 @@
 ﻿using DoctorSlots.Api.Services;
-using DoctorSlots.Api.Services.SlotParser;
 using DoctorSlots.Api.Services.SlotServiceClient;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +28,7 @@ namespace DoctorSlots.Api
             services.Configure<SlotServiceConfiguration>(Configuration.GetSection("SlotService"));
 
             services.AddScoped<IEncoder, Utils.Encoder>();
+            services.AddScoped<IHttpClientFactory, HttpClientFactory>();
             services.AddScoped<IAuthHttpClient, SlotHttpClient>();
             services.AddScoped<ISlotService, SlotService>();
 
@@ -38,11 +38,6 @@ namespace DoctorSlots.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             // Handle global errors (error 500)
             app.UseExceptionHandler(errorApp =>
             {

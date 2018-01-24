@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DoctorSlots.Api.Services.SlotParser
+namespace DoctorSlots.Api.Services
 {
     public interface ISlotService
     {
@@ -14,6 +14,7 @@ namespace DoctorSlots.Api.Services.SlotParser
         /* Converts a WeeklyAvailability with work periods to a list of slots */
         List<Slot> ParseWorkPeriods(WeeklyAvailability weeklyAvailability, DateTime firstDayOfWeek);
 
+        /* Performs a slot reservation for a given TakeSlot */
         Task PerformSlotReservation(TakeSlot takeSlot);
     }
 }

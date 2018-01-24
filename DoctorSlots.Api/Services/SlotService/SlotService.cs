@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DoctorSlots.Api.Services.SlotParser
+namespace DoctorSlots.Api.Services
 {
     public class SlotService : ISlotService
     {
@@ -42,7 +42,7 @@ namespace DoctorSlots.Api.Services.SlotParser
             List<Slot> slots = new List<Slot>();
 
             //discard past days
-            var todayWeekNumber = (int)(DateTime.Now.DayOfWeek + 6) % 7;
+            var todayWeekNumber = (int)(date.DayOfWeek + 6) % 7;
             var validDays = weeklyAvailability.DaysAvailability.Where(d => d.DayOfWeek >= todayWeekNumber);
             foreach (var dailyAvailability in validDays)
             {
@@ -62,7 +62,7 @@ namespace DoctorSlots.Api.Services.SlotParser
                     daySlots.RemoveAll(s => dailyAvailability.BusySlots.Any(b => b.Start == s.Start));
 
                 //remove past hours
-                daySlots.RemoveAll(s => s.Start < DateTime.Now);
+                daySlots.RemoveAll(s => s.Start < date);
 
                 slots.AddRange(daySlots);
             }
@@ -72,7 +72,7 @@ namespace DoctorSlots.Api.Services.SlotParser
 
         public async Task PerformSlotReservation(TakeSlot takeSlot)
         {
-            await _httpClient.PostAsync<TakeSlot>(TakeSlotUrl, takeSlot);
+            await _httpClient.PostAsync(TakeSlotUrl, takeSlot);
         }
 
         private DateTime GetMondayOfWeek(DateTime date)

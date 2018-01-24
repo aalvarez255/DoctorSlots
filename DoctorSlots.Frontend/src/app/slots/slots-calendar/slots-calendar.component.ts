@@ -52,7 +52,7 @@ export class SlotsCalendarComponent implements OnInit {
 			contentHeight: "auto",
 			timezone: "auto",
 			events: (start, end, timezone, callback) => {
-				this._api.getSlots(start).then(response => {
+				this._api.getSlots(new Date()).then(response => {
 					//limit min and max hours in calendar
 					this._facilityId = response["facilityId"]
 

@@ -10,59 +10,44 @@ namespace DoctorSlots.Api.Services
 {
     public abstract class AuthHttpClient : IAuthHttpClient
     {
+        private readonly IHttpClientFactory _httpClientFactory;
+
         public abstract string BaseAddress { get; }
+
+        public AuthHttpClient(IHttpClientFactory httpClientFactory)
+        {
+            _httpClientFactory = httpClientFactory;
+        }
 
         public async Task<T> GetAsync<T>(string url)
         {
-            Func<HttpClient, Task<T>> getMethod = async (httpClient) => {
-                T result = default(T);
+            T result = default(T);
 
-                HttpResponseMessage response = await httpClient.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseText = await response.Content.ReadAsStringAsync();
-                    result = JsonConvert.DeserializeObject<T>(responseText);
-                }
-
-                return result;
-            };
-
-            return await ApiRequest<T>(getMethod);
-        }
-
-        public async Task PostAsync<T>(string url, T data)
-        {
-            Func<HttpClient, Task<T>> postMethod = async (httpClient) => {
-                var dataAsString = JsonConvert.SerializeObject(data);
-                var content = new StringContent(dataAsString);
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-                HttpResponseMessage response = await httpClient.PostAsync(url, content);
-                if (!response.IsSuccessStatusCode)
-                    throw new Exception(await response.Content.ReadAsStringAsync());
-
-                return data;
-            };
-
-            await ApiRequest<T>(postMethod);
-        }
-
-        private async Task<T> ApiRequest<T>(Func<HttpClient, Task<T>> action)
-        {
-            using (var httpClientHandler = new HttpClientHandler())
+            HttpResponseMessage response = await CreateHttpClient().GetAsync(url);
+            if (response.IsSuccessStatusCode)
             {
-                // required to make request to a self-signed SSL certificate API
-                httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
-                using (var client = new HttpClient(httpClientHandler))
-                {
-                    client.BaseAddress = new Uri(BaseAddress);
-                    client.DefaultRequestHeaders.Authorization = GetAuthorizationHeader();
-
-                    return await action(client);
-                }
+                string responseText = await response.Content.ReadAsStringAsync();
+                result = JsonConvert.DeserializeObject<T>(responseText);
             }
+
+            return result;
         }
 
+        public async Task PostAsync(string url, object data)
+        {
+            var dataAsString = JsonConvert.SerializeObject(data);
+            var content = new StringContent(dataAsString);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpResponseMessage response = await CreateHttpClient().PostAsync(url, content);
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(await response.Content.ReadAsStringAsync());
+        }
         protected abstract AuthenticationHeaderValue GetAuthorizationHeader();
+
+        private HttpClient CreateHttpClient()
+        {
+            return _httpClientFactory.Create(BaseAddress, GetAuthorizationHeader());
+        }
     }
 }

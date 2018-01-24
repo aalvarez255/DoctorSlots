@@ -13,7 +13,11 @@ namespace DoctorSlots.Api.Services.SlotServiceClient
 
         private readonly IEncoder _encoder;
 
-        public SlotHttpClient(IOptions<SlotServiceConfiguration> serviceConfiguration, IEncoder encoder)
+        public SlotHttpClient(
+            IOptions<SlotServiceConfiguration> serviceConfiguration, 
+            IEncoder encoder, 
+            IHttpClientFactory httpClientFactory) 
+            : base(httpClientFactory)
         {
 
             _baseAddress = serviceConfiguration.Value.BaseAddress;

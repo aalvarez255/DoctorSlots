@@ -9,6 +9,6 @@ namespace DoctorSlots.Api.Services
     {
         /* Performs a GET request to the provided URL using Authorization header */
         Task<T> GetAsync<T>(string url);
-        Task PostAsync<T>(string url, T data);
+        Task PostAsync(string url, object data);
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using DoctorSlots.Api.DTOs;
 using DoctorSlots.Api.Extensions;
 using DoctorSlots.Api.Models;
-using DoctorSlots.Api.Services.SlotParser;
+using DoctorSlots.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoctorSlots.Api.Controllers
@@ -37,7 +37,7 @@ namespace DoctorSlots.Api.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(new ApiError(400, e.Message));
             }
         }
     }

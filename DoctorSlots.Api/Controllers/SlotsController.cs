@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using DoctorSlots.Api.DTOs;
 using DoctorSlots.Api.Services;
-using DoctorSlots.Api.Services.SlotParser;
 using DoctorSlots.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using DoctorSlots.Api.Extensions;
@@ -24,7 +23,7 @@ namespace DoctorSlots.Api.Controllers
         [HttpGet("{date}")]
         public async Task<IActionResult> Get(DateTime date)
         {
-            if (date == null || date == DateTime.MinValue)
+            if (date.IsNullOrMin())
                 return BadRequest(new ApiError(400, "Incorrect or missing parameter 'date'"));
 
             var availability = await _slotService.GetWeeklyAvailability(date);
