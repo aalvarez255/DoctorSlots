@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorSlots.Api", "DoctorSlots.Api\DoctorSlots.Api.csproj", "{4B657F97-E65D-4A61-81DD-813FD2049A81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorSlots.Api.Tests", "DoctorSlots.Library.Tests\DoctorSlots.Api.Tests.csproj", "{E4C6DB12-EF23-4A7F-8C8D-5909CB2C7943}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorSlots.Api.Tests", "DoctorSlots.Api.Tests\DoctorSlots.Api.Tests.csproj", "{E4C6DB12-EF23-4A7F-8C8D-5909CB2C7943}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
