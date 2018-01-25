@@ -42,7 +42,7 @@ export class SlotsCalendarComponent implements OnInit {
         const today = new Date()
 
         $('#calendar').fullCalendar({
-            slotLabelFormat:"HH:mm",
+            slotLabelFormat: 'HH:mm',
             timeFormat: 'HH:mm',
             allDaySlot: false,
             defaultDate: today,
@@ -54,8 +54,12 @@ export class SlotsCalendarComponent implements OnInit {
             contentHeight: 'auto',
             timezone: 'auto',
             events: (start, end, timezone, callback) => {
-                this._api.getSlots(new Date()).then(response => {
-                    //limit min and max hours in calendar
+                let requestDate = new Date()
+                if (start.toDate() > requestDate) {
+                    requestDate = start.toDate()
+                }
+                this._api.getSlots(requestDate).then(response => {
+                    // limit min and max hours in calendar
                     this._facilityId = response['facilityId']
 
                     const slots = response['slots']
@@ -71,20 +75,28 @@ export class SlotsCalendarComponent implements OnInit {
             eventClick: (calEvent, jsEvent, view) => {
                 const startDate = new Date(calEvent.start)
                 const endDate = new Date(calEvent.end)
-                this._router.navigate(['/reservation'], { queryParams: { start: startDate.toJSON(), end: endDate.toJSON(), facilityId: this._facilityId } })
+                this._router.navigate(['/reservation'], {
+                    queryParams: {
+                        start: startDate.toJSON(),
+                        end: endDate.toJSON(),
+                        facilityId: this._facilityId
+                    }
+                })
             },
             eventColor: '#378006',
             loading: (isLoading, view) => {
-                if (isLoading) { this.blockUI.start(this._loadingText) }
-                else this.blockUI.stop()
+                if (isLoading) {
+                    this.blockUI.start(this._loadingText)
+                } else {
+                    this.blockUI.stop()
+                }
             },
             viewRender: (currentView) => {
                 /* disable past dates */
                 if (today >= currentView.start && today <= currentView.end) {
                     $('.fc-prev-button').prop('disabled', true)
                     $('.fc-prev-button').addClass('fc-state-disabled')
-                }
-                else {
+                } else {
                     $('.fc-prev-button').removeClass('fc-state-disabled')
                     $('.fc-prev-button').prop('disabled', false)
                 }

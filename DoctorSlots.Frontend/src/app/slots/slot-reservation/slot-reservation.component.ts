@@ -41,9 +41,8 @@ export class SlotReservationComponent implements OnInit {
         this._route
             .queryParams
             .subscribe(params => {
-                let startParam = moment(params['start'])
-                let endParam = moment(params['end'])                
-
+                const startParam = moment(params['start'])
+                const endParam = moment(params['end'])
                 this.slotReservation.facilityId = params['facilityId']
                 this.slotReservation.start = startParam.format('DD/MM/YYYY HH:mm:ss')
                 this.slotReservation.end = endParam.format('DD/MM/YYYY HH:mm:ss')
@@ -56,7 +55,6 @@ export class SlotReservationComponent implements OnInit {
         if (this.form.valid) {
             this.apiError = null
             this._api.postSlotReservation(this.slotReservation).then((data) => {
-                console.log('success')
                 this.success = true
             }).catch(err => {
                 this.apiError = err

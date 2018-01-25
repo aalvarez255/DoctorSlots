@@ -16,7 +16,11 @@ export class AppHttpService {
     }
 
     private _handleError(error) {
-        return Promise.reject(error.error && error.error.message)
+        if (error.error && error.error.message) {
+            return Promise.reject(error.error.message)
+        } else {
+            return Promise.reject(error.message)
+        }
     }
 
     private _onInit() {
